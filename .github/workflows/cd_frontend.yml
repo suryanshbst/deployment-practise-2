@@ -29,6 +29,8 @@ jobs:
           file: ./docker/Dockerfile.frontend
           push: true
           tags: suryambitious/user-app-frontend:${{ github.sha }}
-          build-args: DATABASE_URL=${{ secrets.DATABASE_URL }}
+          build-args: |
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            BUILD_APP=false
 
       

@@ -3,7 +3,9 @@ FROM oven/bun:1
 WORKDIR /usr/src/app
 
 ARG DATABASE_URL
+ARG BUILD_APP=true
 ENV DATABASE_URL=${DATABASE_URL}
+ENV BUILD_APP=${BUILD_APP}
 
 COPY ./packages ./packages
 COPY ./package.json ./package.json
@@ -14,7 +16,11 @@ COPY . .
 RUN bun install
 
 RUN bun run db:generate
-RUN bun run build
+RUN if [ "$BUILD_APP" = "true" ]; then \
+			bun run build; \
+		else \
+			echo "Skipping app build (BUILD_APP=${BUILD_APP})"; \
+		fi
 
 EXPOSE 3000
 
