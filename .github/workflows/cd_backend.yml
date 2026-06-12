@@ -1,4 +1,4 @@
-name: Continuous Deployment (Prod) (Backend)
+name: Continuous Deployment (Backend)
 on:
   push:
     branches: [main]
@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push 
         uses: docker/build-push-action@v5
         with:
           context: .
